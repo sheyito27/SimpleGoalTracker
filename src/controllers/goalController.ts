@@ -11,7 +11,7 @@ export const getAllGoals = (req: Request, res: Response) => {
 export const getGoalById = (req: Request, res: Response) => {
     const id = req.params.id;
     const goal = goalRepository.findOne(id);
-    console.log("Alguien pidió acceso a la meta " + goal)
+    console.log("Alguien pidió acceso a la meta " + goal?.title)
     if (goal) {
         return res.status(200).json(goal);
     } else {
