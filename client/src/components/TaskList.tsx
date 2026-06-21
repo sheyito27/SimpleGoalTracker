@@ -37,11 +37,15 @@ const TaskList = ({tasks, setTasks, goalId}: TaskListProps) => {
     
     }
 
+  const goalTasks = tasks.filter(t => t.linkedGoalId === goalId)
+
   return (
     <div className='flex flex-col gap-2'>
-      {tasks.map(task => (
+      {goalTasks.length === 0 ? 
+      (<p className='text-[#D4E4FA] text-lg font-bold'>No hay tareas aun</p> ): 
+      (goalTasks.map(task => (
         <TaskItem key={task.id} task={task} onToggle={toggleCheck} onUpdateTitle={updateTitle} />
-      ))}
+      )))}
       <button className="self-end flex flex-row items-center p-2 mt-2 rounded-full bg-[#57F1DB] font-bold text-[#003731] text-xs" onClick={addTask}><Mas height={15} width={15} /></button>
     </div>
   )

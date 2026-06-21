@@ -34,7 +34,7 @@ const TaskItem = ({task, onToggle, onUpdateTitle}: TaskRowProps) => {
     }
   return (
     <div className="flex items-center gap-3 py-1">
-      <input type="checkbox" checked={task.isCompleted} onChange={()=> onToggle(task.id)}></input>
+      <input type="checkbox" checked={task.isCompleted} onChange={()=> onToggle(task.id)} className='accent-[#52E2CD]'></input>
       {isEditing ? <input type="text" value={editValue} onChange={(e)=> setEditValue(e.target.value)} onBlur={handleSave} onKeyDown={handleKeyDown} autoFocus className="bg-[#0D1A26] text-[#D4E4FA] px-2 py-0.5 rounded outline-none border border-[#3C4A46] w-full"
       />: (
         <div className="flex items-center flex-row gap-2">
