@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import type { Goal } from "../types"
 import { Cancel } from "../assets/svgs"
+import {motion} from 'framer-motion'
 
 const GoalModal = ({onClose, onGoalCreated}:{onClose: () => void, onGoalCreated: (goal: Goal) => void }) => {
     const [form, setForm] = useState({
@@ -9,7 +10,7 @@ const GoalModal = ({onClose, onGoalCreated}:{onClose: () => void, onGoalCreated:
         startDate: '',
         endDate: ''
     })
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = async(e) =>{
+  const handleSubmit = async(e : React.SubmitEvent) =>{
     e.preventDefault()
     const hoy = new Date().toISOString().split("T")[0]
 
@@ -65,7 +66,7 @@ const GoalModal = ({onClose, onGoalCreated}:{onClose: () => void, onGoalCreated:
                     className="w-full bg-[#0D1A26] text-[#D4E4FA] px-3 py-2 rounded outline-none border border-[#3C4A46] mb-3"
                 />
                 <div className="flex flex-row items-center justify-center">
-                    <button type="submit" className="bg-[#2DD4BF] rounded-xl px-20 py-3 mt-4  mb-6 font-bold text-[#003731]">Guardar</button>
+                    <motion.button whileHover={{scale: 0.9}} whileTap={{scale: 1.1}} type="submit" className="bg-[#2DD4BF] rounded-xl px-20 py-3 mt-4  mb-6 font-bold text-[#003731]">Guardar</motion.button>
                 </div>
             </form>
         </div>

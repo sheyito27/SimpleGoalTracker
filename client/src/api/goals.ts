@@ -1,19 +1,14 @@
 import type { Goal } from "../types";
 
-export async function fetchGoals(){
-    try {
+export async function fetchGoals(): Promise<Goal[]>{
         const answer = await fetch('/goals')
 
         if(!answer.ok) throw new Error(`Error en la peticion: ${answer.status}`);
         const datos = await answer.json()
         return datos
-    }
-    catch(error){
-        console.error('Hubo un problema en la operacion fetch', error)
-    }
 }
 
-export async function createGoal(data: Goal){
+export async function createGoal(data: Goal): Promise<Goal>{
     const body = {
         id: crypto.randomUUID(),
         title: data.title,
@@ -35,9 +30,13 @@ export async function createGoal(data: Goal){
     return res.json()
 }
 
-export async function fetchGoalById(id: string) {
+export async function fetchGoalById(id: string): Promise<Goal> {
   const res = await fetch(`/goals/${id}`)
 
   if (!res.ok) throw new Error(`Error: ${res.status}`)
   return res.json()
+}
+
+export async function updateGoal(id: string) {
+    
 }
