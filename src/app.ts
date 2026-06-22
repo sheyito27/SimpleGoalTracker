@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { createGoal, getAllGoals, getGoalById } from './controllers/goalController.js';
+import { createGoal, getAllGoals, getGoalById, updateGoal } from './controllers/goalController.js';
 
 export const app = express();
 app.use(cors());
@@ -11,3 +11,5 @@ app.get("/goals", getAllGoals);
 app.get("/goals/:id", getGoalById)
 
 app.post("/goals/", createGoal)
+
+app.patch("/goals/:id", updateGoal)
