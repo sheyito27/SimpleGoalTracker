@@ -11,7 +11,7 @@ Arquitectura Escalable: Basada en TypeScript para garantizar la integridad de lo
  Lenguaje: Typescript.
  Runtime: Node.
  Frameworks: Express.
- Base de datos: MySQL.
+ Base de datos: PostgreSQL (dockerizado) + Prisma.
  Dependencias: Prisma, Zod.
 
 ## Frontend
@@ -31,9 +31,18 @@ Dependencias: TanStackQuery
 
 
 ## Instalación
-Instala las dependencias: npm install
 
-Inicia en modo desarrollo: npm run dev
+### Requisitos
+- Node.js 20+
+- Docker + Docker Compose
+
+### Pasos
+
+1. Instala las dependencias: `npm install`
+2. Crea tu entorno: `cp .env.example .env`
+    - Si el puerto 5432 está ocupado, cambia `DB_PORT` en tu `.env`.
+3. Levanta BD + migraciones + datos: `npm run setup`
+4. Inicia en modo desarrollo: `npm run dev`
 
 ¡Empieza a rastrear tus metas!
 
@@ -41,14 +50,20 @@ Inicia en modo desarrollo: npm run dev
 ## Pruebas
 El proyecto usa Jest y Supertest para los tests de la API.
 
-Ejecuta la suite de tests: npm test
+Al ejecuta la suite de tests se resetea y seeda automáticamente una BD de test aislada. Se requiere Docker levantado: 
+
+```bash
+npm test
+```
 
 Los tests se localizan en la carpeta `tests/` y cubren los endpoints del controlador de metas (`GET /goals` y `GET /goals/:id`).
 
 
 
 ## Próximos pasos
-- [ ] Implementar CRUD completo de metas.
+- [X] Implementar CRUD completo de metas.
 - [ ] Implementar CRUD completo de tareas
-- [ ] Añadir persistencia de datos (conectar a una base de datos real)
+- [X] Añadir persistencia de datos (conectar a una base de datos dockerizada)
 - [x] Añadir test unitarios al controlador de metas.
+- [ ] Crear suit de test para el CRUD completo de metas.
+- [ ] Crear suit de test para el CRUD completo de tareas.
