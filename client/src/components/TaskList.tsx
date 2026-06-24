@@ -46,7 +46,7 @@ const TaskList = ({tasks, setTasks, goalId}: TaskListProps) => {
       (goalTasks.map(task => (
         <TaskItem key={task.id} task={task} onToggle={toggleCheck} onUpdateTitle={updateTitle} />
       )))}
-      <button className="self-end flex flex-row items-center p-2 mt-2 rounded-full bg-[#57F1DB] font-bold text-[#003731] text-xs" onClick={addTask}><Mas height={15} width={15} /></button>
+      <button className="self-end flex flex-row items-center p-2 mb-5  rounded-full bg-[#57F1DB] font-bold text-[#003731] text-xs " onClick={addTask}><Mas height={15} width={15} /></button>
     </div>
   )
 }
