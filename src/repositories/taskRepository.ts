@@ -1,6 +1,6 @@
 import { prisma } from "../lib/prisma.js";
 
-import { Task } from "../models/taskModel.js";
+import { Task, CreateTaskDTO } from "../models/taskModel.js";
 
 import type { Task as TaskRow } from "../../generated/prisma/client.js";
 
@@ -31,9 +31,9 @@ export const taskRepository: Repository<Task> = {
     return row ? toApiTask(row) : undefined;
   },
 
-  addOne: async (task: Task) => {
+  addOne: async (task: CreateTaskDTO) => {
     const row = await prisma.task.create({
-      data: task,
+      data: task as any,
     });
 
     return toApiTask(row);

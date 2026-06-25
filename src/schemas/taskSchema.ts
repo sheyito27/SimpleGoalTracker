@@ -1,19 +1,13 @@
  import z from "zod";
  
- export const TaskBase = z.object({
+ export const TaskSchema = z.object({
+  id: z.string().optional(), 
   title: z.string().min(1, "El título es obligatorio"),
   description: z.string().max(500).optional(),
   startDate: z.coerce.date(),
   isCompleted: z.boolean().default(false),
-  linkedGoal: z.string().uuid()
-
+  linkedGoalId: z.string()
 });
 
 
-export const CreateTaskSchema = TaskBase;
-
-export const UpdateTaskSchema = TaskBase.omit({ linkedGoal: true })
-  .partial()
-  .extend({
-    id: z.string().uuid("El ID de la tarea es obligatorio para actualizar"),
-  });
+export const UpdateTaskSchema = TaskSchema.partial()
