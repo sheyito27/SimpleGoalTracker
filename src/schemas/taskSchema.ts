@@ -10,4 +10,4 @@
 });
 
 
-export const UpdateTaskSchema = TaskSchema.partial()
+export const UpdateTaskSchema = TaskSchema.omit({ id: true }).partial()

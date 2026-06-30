@@ -12,4 +12,4 @@ export const GoalSchema = z.object({
   isCompleted: z.boolean().default(false),
 });
 
-export const UpdateGoalSchema = GoalSchema.partial()
+export const UpdateGoalSchema = GoalSchema.omit({ id: true }).partial()
