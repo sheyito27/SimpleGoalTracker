@@ -11,3 +11,7 @@
 
 
 export const UpdateTaskSchema = TaskSchema.omit({ id: true }).partial()
+
+export const taskParamsSchema = z.object({
+  id: z.string().uuid(),
+});
