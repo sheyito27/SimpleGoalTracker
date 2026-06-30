@@ -14,6 +14,6 @@ export const GoalSchema = z.object({
 
 export const UpdateGoalSchema = GoalSchema.omit({ id: true }).partial()
 
-export const goalParamsSchema = z.object({
+export const GoalParamsSchema = z.object({
   id: z.string().uuid(),
 });
