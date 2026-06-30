@@ -18,6 +18,6 @@ export const errorHandler = (
   res.status(statusCode).json({
     status: 'error',
     message: err.message || 'Error interno del servidor',
-    stack: process.env.NODE_ENV === 'development' ? err.stack : undefined // Línea exacta donde ha fallado el código
+    stack: process.env.NODE_ENV === 'development' ? err.stack : undefined // Devuelve línea exacta donde ha fallado el código, importante borrarlo si sale a producción
   });
 };
