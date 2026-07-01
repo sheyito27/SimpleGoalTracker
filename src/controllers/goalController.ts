@@ -18,7 +18,6 @@ export const getGoalById = async (req: Request, res: Response) => {
 
 // Crear una nueva meta
 export const createGoal = async (req: Request, res: Response) => {
-    // Nota: req.body ya fue validado por Zod en el middleware 'validate'
     const newGoal = await goalRepository.addOne(req.body);
     res.status(201).json(newGoal);
 };

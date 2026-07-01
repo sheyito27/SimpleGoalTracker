@@ -16,6 +16,7 @@ export const validate = (config: ValidationConfig) => {
       if (!result.success) {
         return res.status(400).json({ message: 'Error en el body', errors: result.error.format() });
       }
+      req.body = result.data
     }
 
     // Validar params
@@ -24,8 +25,8 @@ export const validate = (config: ValidationConfig) => {
       if (!result.success) {
         return res.status(400).json({ message: 'Error en los params', errors: result.error.format() });
       }
+      req.params = result.data
     }
-    
     next();
   };
 };
