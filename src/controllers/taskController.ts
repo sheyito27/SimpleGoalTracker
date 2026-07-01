@@ -18,14 +18,22 @@ export const getTaskById = async (req: Request, res: Response) => {
 
 // Crear una nueva tarea
 export const createTask = async (req: Request, res: Response) => {
-    const { id, ...dataToSave } = req.body;
-    const newTask = await taskRepository.addOne(dataToSave);
+    const { timeline, ...rest } = await req.body
+    const newTask = {
+            ...rest,
+            isCompleted: false,
+            startDate: new Date(), 
+        };
+
+    taskRepository.addOne(newTask)
     res.status(201).json(newTask);
 };
 
+
 // Modificar datos de una tarea
 export const updateTask = async (req: Request, res: Response) => {
-    const updatedTask = await taskRepository.updateOne(req.params.id, req.body);
+    const {...rest} = req.body
+    const updatedTask = await taskRepository.updateOne(req.params.id, rest);
     if (!updatedTask) {
         return res.status(404).json({ message: "Tarea no encontrada" });
     }

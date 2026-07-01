@@ -21,13 +21,11 @@ export const createGoal = async (req: Request, res: Response) => {
     const { timeline, ...rest } = await req.body
     const newGoal = {
             ...rest,
-            id: crypto.randomUUID(), 
             isCompleted: false,
-            
             timeline: {
-                startDate: new Date(), 
-                endDate: new Date(timeline.endDate) 
-            }
+                startDate: new Date(),
+                endDate: timeline.endDate
+            } 
         };
 
     goalRepository.addOne(newGoal)
@@ -36,15 +34,13 @@ export const createGoal = async (req: Request, res: Response) => {
 
 // Modificar datos
 export const updateGoal = async (req: Request, res: Response) => {
-    const goalToUpdate = await goalRepository.findOne(req.params.id)
-    if (!goalToUpdate) {
+     const {...rest} = req.body
+     const goalToUpdate = await goalRepository.updateOne(req.params.id, rest)
+     if (!goalToUpdate) {
         return res.status(404).json({ message: "Meta no encontrada" });
-    }
-    const updatedGoal = await {...goalToUpdate,
-        
-    }
-    res.json(updatedGoal);
-};
+     }
+    res.status(200).json(goalToUpdate);
+}
 
 // Borrar meta
 export const deleteGoal = async (req: Request, res: Response) => {
