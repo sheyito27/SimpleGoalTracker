@@ -21,7 +21,7 @@ describe ('GET /goals/:id', () => {
     });
 
     it('devuelve 404 cuando el id no existe', async () => {
-        const res = await request(app).get('/goals/no-existe');
+        const res = await request(app).get('/goals/4ead28e2-3d0f-4b2e-9abd-6e4a8a8b67');
         expect(res.status).toBe(404);
         expect(res.body).toEqual({ message: 'Meta no encontrada' });
     });
