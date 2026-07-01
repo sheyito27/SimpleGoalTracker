@@ -18,15 +18,30 @@ export const getGoalById = async (req: Request, res: Response) => {
 
 // Crear una nueva meta
 export const createGoal = async (req: Request, res: Response) => {
-    const newGoal = await goalRepository.addOne(req.body);
+    const { timeline, ...rest } = await req.body
+    const newGoal = {
+            ...rest,
+            id: crypto.randomUUID(), 
+            isCompleted: false,
+            
+            timeline: {
+                startDate: new Date(), 
+                endDate: new Date(timeline.endDate) 
+            }
+        };
+
+    goalRepository.addOne(newGoal)
     res.status(201).json(newGoal);
 };
 
 // Modificar datos
 export const updateGoal = async (req: Request, res: Response) => {
-    const updatedGoal = await goalRepository.updateOne(req.params.id, req.body);
-    if (!updatedGoal) {
+    const goalToUpdate = await goalRepository.findOne(req.params.id)
+    if (!goalToUpdate) {
         return res.status(404).json({ message: "Meta no encontrada" });
+    }
+    const updatedGoal = await {...goalToUpdate,
+        
     }
     res.json(updatedGoal);
 };
