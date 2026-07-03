@@ -18,18 +18,18 @@ export const getGoalById = async (req: Request, res: Response) => {
 
 // Crear una nueva meta
 export const createGoal = async (req: Request, res: Response) => {
-    const { timeline, ...rest } = await req.body
+    const { timeline, ...rest } = req.body;
     const newGoal = {
-            ...rest,
-            isCompleted: false,
-            timeline: {
-                startDate: new Date(),
-                endDate: timeline.endDate
-            } 
-        };
+        ...rest,
+        isCompleted: false,
+        timeline: {
+            startDate: new Date(),
+            endDate: timeline.endDate
+        } 
+    };
 
-    goalRepository.addOne(newGoal)
-    res.status(201).json(newGoal);
+    const savedGoal = await goalRepository.addOne(newGoal);
+    res.status(201).json(savedGoal);
 };
 
 // Modificar datos

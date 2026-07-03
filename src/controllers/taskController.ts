@@ -18,15 +18,14 @@ export const getTaskById = async (req: Request, res: Response) => {
 
 // Crear una nueva tarea
 export const createTask = async (req: Request, res: Response) => {
-    const { timeline, ...rest } = await req.body
     const newTask = {
-            ...rest,
+            ...req.body,
             isCompleted: false,
             startDate: new Date(), 
         };
 
-    taskRepository.addOne(newTask)
-    res.status(201).json(newTask);
+    const savedTask = await taskRepository.addOne(newTask);
+    res.status(201).json(savedTask);
 };
 
 
