@@ -4,24 +4,28 @@ import { mockData } from '../src/data/mockData.js';
 async function main() {
     // Metas primero
     for (const goal of mockData.goals){
-        const { timeline, ...rest } = goal;
-        await prisma.goal.upsert({
-            where: { id: goal.id},
+        const { timeline, tasks, ...rest } = goal;
+
+        // Upsert por la clave natural (title es unique) y capturar id generado
+        const savedGoal = await prisma.goal.upsert({
+            where: { title: goal.title},
             update: {},
             create: { ...rest, startDate: timeline.startDate, endDate: timeline.endDate },
-        }); 
-    };
-
-    // Tareas
-    for (const task of mockData.tasks) {
-        await prisma.task.upsert({
-            where: { id: task.id },
-            update: {},
-            create: task,
         });
+        
+        // Tareas
+        for (const task of tasks) {
+            await prisma.task.upsert({
+                // Clave compuesta unique (title, linkedGoalId) -> En prisma es title_linkedGoalId
+                where: { title_linkedGoalId: { title: task.title, linkedGoalId: savedGoal.id } },
+                update: {},
+                create: { ...task, linkedGoalId: savedGoal.id },
+            });      
+        }
+
     };
 
-      console.log(`Seed OK: ${mockData.goals.length} metas, ${mockData.tasks.length} tareas`);
+    console.log(`Seed OK: ${mockData.goals.length} metas`);
 };
 
 main()
