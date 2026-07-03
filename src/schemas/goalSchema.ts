@@ -6,18 +6,18 @@ export const GoalSchema = z.object({
   timeline: z.object ({
     endDate: z.coerce.date(), 
   }),
-  isCompleted: z.boolean(),
 });
 
 export const UpdateGoalSchema = z.object({
   title: z.string().min(1, "El título es obligatorio").optional(),
   description: z.string().max(500).optional(),
-  startDate: z.coerce.date().optional(),
-  endDate: z.coerce.date().optional(),
+  timeline: z.object({
+    startDate: z.coerce.date().optional(),
+    endDate: z.coerce.date().optional(),
+  }).optional(),
   isCompleted: z.boolean().optional(),
 });
 
-
 export const GoalParamsSchema = z.object({
-  id: z.string(),
+  id: z.string().uuid(),
 });

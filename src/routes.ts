@@ -3,7 +3,7 @@ import * as taskController from './controllers/taskController.js'
 import { Router } from 'express';
 
 import { GoalSchema, UpdateGoalSchema } from './schemas/goalSchema.js';
-import { taskParamsSchema, TaskSchema, UpdateTaskSchema } from './schemas/taskSchema.js';
+import { TaskParamsSchema, TaskSchema, UpdateTaskSchema } from './schemas/taskSchema.js';
 import { GoalParamsSchema } from './schemas/goalSchema.js';
 
 import { validate } from './middlewares/validate.js';
@@ -22,7 +22,7 @@ goalRouter.delete("/:id", validate({ params: GoalParamsSchema }), asyncHandler(g
 export const taskRouter = Router();
 
 taskRouter.get("/", asyncHandler(taskController.getAllTasks));
-taskRouter.get("/:id", validate({ params: taskParamsSchema }), asyncHandler(taskController.getTaskById));
+taskRouter.get("/:id", validate({ params: TaskParamsSchema }), asyncHandler(taskController.getTaskById));
 taskRouter.post("/", validate({ body: TaskSchema }), asyncHandler(taskController.createTask));
-taskRouter.patch("/:id", validate({ params: taskParamsSchema, body: UpdateTaskSchema }), asyncHandler(taskController.updateTask));
-taskRouter.delete("/:id", validate({ params: taskParamsSchema }), asyncHandler(taskController.deleteTask));
+taskRouter.patch("/:id", validate({ params: TaskParamsSchema, body: UpdateTaskSchema }), asyncHandler(taskController.updateTask));
+taskRouter.delete("/:id", validate({ params: TaskParamsSchema }), asyncHandler(taskController.deleteTask));
