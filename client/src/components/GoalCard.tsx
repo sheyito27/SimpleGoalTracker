@@ -34,8 +34,8 @@ export function GoalCard({goal, onViewDetails}: {goal: Goal, onViewDetails: ()=>
                     </div>
                 </div>
                 <div className="flex flex-col justify-between">
-                    <div className="pr-4 self-end flex flex-row ">
-                        <motion.button className="text-[#bb3131ea] mr-4" onClick={(e)=> {e.stopPropagation(); deleteGoalMutation.mutate(goal)}}><Trash height={20} width={20} /></motion.button>
+                    <div className="pr-4 self-end flex flex-row gap-4 ">
+                        <motion.button className="text-[#bb3131ea]" onClick={(e)=> {e.stopPropagation(); deleteGoalMutation.mutate(goal)}}><Trash height={20} width={20} /></motion.button>
                         <motion.span animate={{rotate: isGoalExpanded ? 180 : 0}} transition={{duration: 0.2}} style={{display: "inline-block"}}> <DesplegableDown/></motion.span>
                     </div>
                     <motion.button whileTap={{scale: 1.1}} whileHover={{scale:0.9}} className="text-[#57F1DB] text-xs mb-2 pr-4 inline-block whitespace-nowrap" onClick={(e)=>{e.stopPropagation(); onViewDetails()}}>Ver detalles</motion.button>

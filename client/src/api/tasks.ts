@@ -23,7 +23,13 @@ export async function createTask(goalId: string, task: CreateTaskInput): Promise
     return res.json() as Promise<Task>
 }
 
-export async function deleteTask(taskId:string): Promise<Task> {
+export async function deleteTask(taskId:string): Promise<Task | null> {
+    const confirmation = window.confirm('¿Estas seguro de borrar la tarea?')
+
+    if(!confirmation){
+        return null
+    }
+    
     const res = await fetch(`/tasks/${taskId}`, {
         method: 'DELETE'
     })
