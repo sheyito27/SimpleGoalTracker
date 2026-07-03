@@ -6,3 +6,5 @@ export type Task = {
   startDate: Date;
   isCompleted: boolean;
 };
+
+export type CreateTaskDTO = Omit<Task, 'id' | 'description'> & { description?: string };
