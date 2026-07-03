@@ -12,7 +12,7 @@ function toApiTask(row: any): Task {
     };
 }
 
-export const taskRepository : Repository<Task> = {
+export const taskRepository : Repository<Task, CreateTaskDTO> = {
     findAll: async () => {
         const rows = await prisma.task.findMany()
         return rows.map(toApiTask)

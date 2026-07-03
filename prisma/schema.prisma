@@ -9,7 +9,7 @@ datasource db {
 }
 
 model Goal {
-  id            String  @id
+  id            String  @id @default(uuid())
   title         String  @unique
   description   String
   startDate     DateTime
