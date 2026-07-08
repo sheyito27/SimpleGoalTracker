@@ -7,4 +7,5 @@ export type Goal = {
     endDate: Date;
   };
   isCompleted: boolean;
+  userId: string,
 };
