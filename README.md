@@ -52,6 +52,8 @@ Dependencias: TanStackQuery
 3. Levanta BD + migraciones + datos: `npm run setup`
 4. Inicia en modo desarrollo: `npm run dev`
 
+> Si ya tenías la Base de Datos levantada antes, ejecuta `npm run db:reset` en lugar de `npm run setup`.
+
 ¡Empieza a rastrear tus metas!
 
 ## Pruebas
