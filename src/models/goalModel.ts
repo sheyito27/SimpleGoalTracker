@@ -8,3 +8,10 @@ export type Goal = {
   };
   isCompleted: boolean;
 };
+
+export enum Status {
+  PENDING = 'PENDING',
+  PAUSED = 'PAUSED',
+  COMPLETED = 'COMPLETED',
+  REJECTED = 'REJECTED'
+}
