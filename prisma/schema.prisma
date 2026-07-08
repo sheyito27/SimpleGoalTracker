@@ -10,12 +10,16 @@ datasource db {
 
 model Goal {
   id            String  @id @default(uuid())
-  title         String  @unique
+  title         String
   description   String
   startDate     DateTime
   endDate       DateTime
   isCompleted   Boolean @default(false)
   tasks         Task[]
+  userId        String
+  user          User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([title, userId])
 }
 
 model Task {
@@ -28,4 +32,16 @@ model Task {
   goal          Goal    @relation(fields: [linkedGoalId], references: [id], onDelete: Cascade)
 
   @@unique([title, linkedGoalId])
+}
+
+model User {
+  id            String    @id @default(uuid())
+  username      String    @unique
+  passwordHash  String
+  name          String
+  email         String    @unique
+  birthDate     DateTime  @db.Date
+  createdAt     DateTime  @default(now())
+  isActive      Boolean   @default(true)
+  goals         Goal[]
 }
