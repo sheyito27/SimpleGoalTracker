@@ -6,6 +6,14 @@ export type Goal = {
     startDate: Date;
     endDate: Date;
   };
-  isCompleted: boolean;
-  userId: string,
+  status: Status;
+  userId: string;
+  categoryId: number;
 };
+
+export enum Status {
+  PENDING = 'PENDING',
+  PAUSED = 'PAUSED',
+  COMPLETED = 'COMPLETED',
+  REJECTED = 'REJECTED'
+}

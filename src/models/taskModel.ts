@@ -3,8 +3,19 @@ export type Task = {
   linkedGoalId: string;
   title: string;
   description: string;
-  startDate: Date;
-  isCompleted: boolean;
+  timeline: {
+    startDate: Date;
+    endDate: Date;
+  }
+  status: Status;
 };
+
+export enum Status {
+  PENDING = 'PENDING',
+  INACTIVE = 'INACTIVE',
+  PAUSED = 'PAUSED',
+  COMPLETED = 'COMPLETED',
+  REJECTED = 'REJECTED'
+}
 
 export type CreateTaskDTO = Omit<Task, 'id' | 'description'> & { description?: string };

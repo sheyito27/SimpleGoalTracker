@@ -15,7 +15,8 @@ export const UpdateGoalSchema = z.object({
     startDate: z.coerce.date().optional(),
     endDate: z.coerce.date().optional(),
   }).optional(),
-  isCompleted: z.boolean().optional(),
+  status: z.string().optional(),
+
 });
 
 export const GoalParamsSchema = z.object({
