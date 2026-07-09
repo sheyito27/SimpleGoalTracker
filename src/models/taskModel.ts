@@ -8,7 +8,6 @@ export type Task = {
     endDate: Date;
   }
   status: Status;
-  userId: string;
 };
 
 export enum Status {
