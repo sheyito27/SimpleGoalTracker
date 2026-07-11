@@ -21,19 +21,23 @@ async function main() {
                 update: {},
                 create: {
                     ...goalRest,
-                    startDate: timeline.startDate,
-                    endDate: timeline.endDate,
+                    timeline,
                     userId: savedUser.id,
                 }
             })
             
             // Tareas
             for (const task of tasks) {
+                const { timeline, ...taskRest } = task as any;
                 await prisma.task.upsert({
                     // Clave compuesta unique (title, linkedGoalId) -> En prisma es title_linkedGoalId
                     where: { title_linkedGoalId: { title: task.title, linkedGoalId: savedGoal.id } },
                     update: {},
-                    create: { ...task, linkedGoalId: savedGoal.id },
+                    create: {
+                        ...taskRest,
+                        timeline: timeline || { startDate: task.startDate },
+                        linkedGoalId: savedGoal.id,
+                    },
                 });      
             }
         }

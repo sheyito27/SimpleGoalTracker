@@ -20,10 +20,9 @@ model Goal {
   id         String  @id @default(uuid())
   title      String
   description String
-  timeline   Json
   status     Status  @default(PENDING)
   userId     String
-  categoryId Int
+  categoryId Int?
   tasks      Task[]
   user       User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -33,8 +32,7 @@ model Goal {
 model Task {
   id           String  @id @default(uuid())
   title        String
-  description  String  @default("")
-  timeline     Json
+  description  String?
   status       Status  @default(PENDING)
   linkedGoalId String
   goal         Goal    @relation(fields: [linkedGoalId], references: [id], onDelete: Cascade)
