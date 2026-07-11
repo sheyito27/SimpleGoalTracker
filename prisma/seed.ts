@@ -2,51 +2,56 @@ import { prisma } from '../src/lib/prisma.js';
 import { mockData } from '../src/data/mockData.js';
 
 async function main() {
-    // Users primero
-    for (const user of mockData.users){
-        const { goals, ...userRest } = user;
+    let totalGoals = 0;
+    let totalTasks = 0;
+
+    for (const userData of mockData.users) {
+        const { goals, ...userRest } = userData;
 
         const savedUser = await prisma.user.upsert({
-            where: { username: user.username },
+            where: { username: userRest.username },
             update: {},
             create: userRest,
         });
 
-        // Metas
-        for (const goal of goals) {
-            const { timeline, tasks, ...goalRest} = goal;
+        for (const goalData of goals) {
+            const { timeline, tasks, ...goalRest } = goalData;
 
             const savedGoal = await prisma.goal.upsert({
-                where: { title_userId: { title: goal.title, userId: savedUser.id } },
+                where: { title_userId: { title: goalRest.title, userId: savedUser.id } },
                 update: {},
                 create: {
                     ...goalRest,
                     startDate: timeline.startDate,
                     endDate: timeline.endDate,
                     userId: savedUser.id,
-                }
-            })
-            
-            // Tareas
-            for (const task of tasks) {
+                },
+            });
+            totalGoals++;
+
+            for (const taskData of tasks) {
+                const { timeline: taskTimeline, ...taskRest } = taskData;
+
                 await prisma.task.upsert({
-                    // Clave compuesta unique (title, linkedGoalId) -> En prisma es title_linkedGoalId
-                    where: { title_linkedGoalId: { title: task.title, linkedGoalId: savedGoal.id } },
+                    where: { title_linkedGoalId: { title: taskRest.title, linkedGoalId: savedGoal.id } },
                     update: {},
-                    create: { ...task, linkedGoalId: savedGoal.id },
-                });      
+                    create: {
+                        ...taskRest,
+                        startDate: taskTimeline.startDate,
+                        endDate: taskTimeline.endDate,
+                        linkedGoalId: savedGoal.id,
+                    },
+                });
+                totalTasks++;
             }
         }
+    }
 
-        
-
-    };
-
-    console.log(`Seed OK: ${mockData.users.length} usuarios`);
+    console.log(`Seed OK: ${mockData.users.length} usuarios, ${totalGoals} metas, ${totalTasks} tareas`);
 };
 
 main()
-    .catch ((e) => {
+    .catch((e) => {
         console.error('Error en el seed', e);
         process.exit(1);
     })

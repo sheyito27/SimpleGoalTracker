@@ -1,3 +1,5 @@
+import { Status } from '../../generated/prisma/enums.js';
+
 export type Task = {
   id: string;
   linkedGoalId: string;
@@ -10,12 +12,8 @@ export type Task = {
   status: Status;
 };
 
-export enum Status {
-  PENDING = 'PENDING',
-  INACTIVE = 'INACTIVE',
-  PAUSED = 'PAUSED',
-  COMPLETED = 'COMPLETED',
-  REJECTED = 'REJECTED'
-}
-
-export type CreateTaskDTO = Omit<Task, 'id' | 'description'> & { description?: string };
+export type CreateTaskDTO = Omit<Task, 'id' | 'description' | 'timeline'> & {
+  description?: string;
+  startDate: Date;
+  endDate: Date;
+};

@@ -5,31 +5,41 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
+}
+
+enum Status {
+  PENDING
+  INACTIVE
+  PAUSED
+  COMPLETED
+  REJECTED
 }
 
 model Goal {
-  id            String  @id @default(uuid())
-  title         String
-  description   String
-  startDate     DateTime
-  endDate       DateTime
-  isCompleted   Boolean @default(false)
-  tasks         Task[]
-  userId        String
-  user          User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id         String   @id @default(uuid())
+  title      String
+  description String
+  startDate  DateTime
+  endDate    DateTime
+  status     Status   @default(PENDING)
+  userId     String
+  categoryId Int?
+  tasks      Task[]
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([title, userId])
 }
 
 model Task {
-  id            String  @id @default(uuid())
-  title         String
-  description   String?
-  startDate     DateTime
-  isCompleted   Boolean @default(false)
-  linkedGoalId  String
-  goal          Goal    @relation(fields: [linkedGoalId], references: [id], onDelete: Cascade)
+  id           String  @id @default(uuid())
+  title        String
+  description  String?
+  status       Status  @default(PENDING)
+  linkedGoalId String
+  startDate    DateTime
+  endDate      DateTime
+  goal         Goal    @relation(fields: [linkedGoalId], references: [id], onDelete: Cascade)
 
   @@unique([title, linkedGoalId])
 }
