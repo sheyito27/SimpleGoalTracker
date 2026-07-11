@@ -1,6 +1,7 @@
-import { Goal, Status as GoalStatus } from "../models/goalModel.js";
-import { Task, Status as TaskStatus } from "../models/taskModel.js";
+import { Goal } from "../models/goalModel.js";
+import { Task } from "../models/taskModel.js";
 import { User } from "../models/userModel.js";
+import { Status } from "../../generated/prisma/enums.js";
 
 type SeedTask = Omit<Task, "id" | "linkedGoalId">;
 type SeedGoal = Omit<Goal, "id" | "userId"> & { tasks: SeedTask[] };
@@ -23,7 +24,7 @@ export const mockData: { users: SeedUser[] } = {
             startDate: new Date("2026-06-01"),
             endDate: new Date("2026-07-01")
           },
-          status: GoalStatus.COMPLETED,
+          status: Status.COMPLETED,
           categoryId: 1,
           tasks: [
             {
@@ -33,7 +34,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-06-02"),
                 endDate: new Date("2026-06-07")
               },
-              status: TaskStatus.COMPLETED
+              status: Status.COMPLETED
             },
             {
               title: "Entender interfaces y types",
@@ -42,7 +43,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-06-08"),
                 endDate: new Date("2026-06-15")
               },
-              status: TaskStatus.COMPLETED
+              status: Status.COMPLETED
             },
             {
               title: "Practicar con proyecto real",
@@ -51,7 +52,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-06-16"),
                 endDate: new Date("2026-06-30")
               },
-              status: TaskStatus.PENDING
+              status: Status.PENDING
             }
           ],
         },
@@ -62,7 +63,7 @@ export const mockData: { users: SeedUser[] } = {
             startDate: new Date("2026-06-15"),
             endDate: new Date("2026-08-15")
           },
-          status: GoalStatus.PENDING,
+          status: Status.PENDING,
           categoryId: 1,
           tasks: [
             {
@@ -72,7 +73,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-06-16"),
                 endDate: new Date("2026-06-20")
               },
-              status: TaskStatus.COMPLETED
+              status: Status.COMPLETED
             },
             {
               title: "Implementar repositorios",
@@ -81,7 +82,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-06-21"),
                 endDate: new Date("2026-07-05")
               },
-              status: TaskStatus.PAUSED
+              status: Status.PAUSED
             },
             {
               title: "Agregar validación con Zod",
@@ -90,7 +91,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-07-06"),
                 endDate: new Date("2026-07-20")
               },
-              status: TaskStatus.PENDING
+              status: Status.PENDING
             }
           ],
         },
@@ -101,7 +102,7 @@ export const mockData: { users: SeedUser[] } = {
             startDate: new Date("2026-07-01"),
             endDate: new Date("2026-08-01")
           },
-          status: GoalStatus.PENDING,
+          status: Status.PENDING,
           categoryId: 1,
           tasks: [
             {
@@ -111,7 +112,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-07-01"),
                 endDate: new Date("2026-07-07")
               },
-              status: TaskStatus.COMPLETED
+              status: Status.COMPLETED
             },
             {
               title: "Practicar migraciones",
@@ -120,7 +121,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-07-08"),
                 endDate: new Date("2026-07-15")
               },
-              status: TaskStatus.PENDING
+              status: Status.PENDING
             },
             {
               title: "Integrar con Express",
@@ -129,7 +130,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-07-16"),
                 endDate: new Date("2026-07-31")
               },
-              status: TaskStatus.INACTIVE
+              status: Status.INACTIVE
             }
           ],
         },
@@ -150,7 +151,7 @@ export const mockData: { users: SeedUser[] } = {
             startDate: new Date("2026-06-01"),
             endDate: new Date("2026-09-01")
           },
-          status: GoalStatus.PENDING,
+          status: Status.PENDING,
           categoryId: 2,
           tasks: [
             {
@@ -160,7 +161,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-06-01"),
                 endDate: new Date("2026-06-07")
               },
-              status: TaskStatus.COMPLETED
+              status: Status.COMPLETED
             },
             {
               title: "Comprar equipamiento",
@@ -169,7 +170,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-06-08"),
                 endDate: new Date("2026-06-10")
               },
-              status: TaskStatus.COMPLETED
+              status: Status.COMPLETED
             },
             {
               title: "Primera carrera de práctica",
@@ -178,7 +179,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-06-15"),
                 endDate: new Date("2026-06-15")
               },
-              status: TaskStatus.PAUSED
+              status: Status.PAUSED
             }
           ],
         },
@@ -189,7 +190,7 @@ export const mockData: { users: SeedUser[] } = {
             startDate: new Date("2026-01-01"),
             endDate: new Date("2026-12-31")
           },
-          status: GoalStatus.PENDING,
+          status: Status.PENDING,
           categoryId: 3,
           tasks: [
             {
@@ -199,7 +200,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-01-01"),
                 endDate: new Date("2026-01-15")
               },
-              status: TaskStatus.COMPLETED
+              status: Status.COMPLETED
             },
             {
               title: "Leer libro mensual enero",
@@ -208,7 +209,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-01-16"),
                 endDate: new Date("2026-01-31")
               },
-              status: TaskStatus.COMPLETED
+              status: Status.COMPLETED
             },
             {
               title: "Leer libro mensual febrero",
@@ -217,7 +218,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-02-01"),
                 endDate: new Date("2026-02-28")
               },
-              status: TaskStatus.REJECTED
+              status: Status.REJECTED
             }
           ],
         },
@@ -228,7 +229,7 @@ export const mockData: { users: SeedUser[] } = {
             startDate: new Date("2026-05-01"),
             endDate: new Date("2026-08-01")
           },
-          status: GoalStatus.PAUSED,
+          status: Status.PAUSED,
           categoryId: 4,
           tasks: [
             {
@@ -238,7 +239,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-05-01"),
                 endDate: new Date("2026-05-07")
               },
-              status: TaskStatus.COMPLETED
+              status: Status.COMPLETED
             },
             {
               title: "Cocinar pasta carbonara",
@@ -247,7 +248,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-05-10"),
                 endDate: new Date("2026-05-10")
               },
-              status: TaskStatus.COMPLETED
+              status: Status.COMPLETED
             },
             {
               title: "Cocinar curry tailandés",
@@ -256,7 +257,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-05-17"),
                 endDate: new Date("2026-05-17")
               },
-              status: TaskStatus.INACTIVE
+              status: Status.INACTIVE
             }
           ],
         },
@@ -277,7 +278,7 @@ export const mockData: { users: SeedUser[] } = {
             startDate: new Date("2026-06-01"),
             endDate: new Date("2026-09-01")
           },
-          status: GoalStatus.PENDING,
+          status: Status.PENDING,
           categoryId: 1,
           tasks: [
             {
@@ -287,7 +288,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-06-01"),
                 endDate: new Date("2026-06-03")
               },
-              status: TaskStatus.COMPLETED
+              status: Status.COMPLETED
             },
             {
               title: "Completar módulo de redes",
@@ -296,7 +297,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-06-04"),
                 endDate: new Date("2026-06-20")
               },
-              status: TaskStatus.PENDING
+              status: Status.PENDING
             },
             {
               title: "Hacer practice exams",
@@ -305,7 +306,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-07-01"),
                 endDate: new Date("2026-07-15")
               },
-              status: TaskStatus.PENDING
+              status: Status.PENDING
             }
           ],
         },
@@ -316,7 +317,7 @@ export const mockData: { users: SeedUser[] } = {
             startDate: new Date("2026-01-01"),
             endDate: new Date("2027-03-01")
           },
-          status: GoalStatus.PENDING,
+          status: Status.PENDING,
           categoryId: 5,
           tasks: [
             {
@@ -326,7 +327,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-01-01"),
                 endDate: new Date("2026-01-31")
               },
-              status: TaskStatus.COMPLETED
+              status: Status.COMPLETED
             },
             {
               title: "Investurar visa y requisitos",
@@ -335,7 +336,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-02-01"),
                 endDate: new Date("2026-02-15")
               },
-              status: TaskStatus.COMPLETED
+              status: Status.COMPLETED
             },
             {
               title: "Reservar vuelos",
@@ -344,7 +345,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-06-01"),
                 endDate: new Date("2026-06-30")
               },
-              status: TaskStatus.PAUSED
+              status: Status.PAUSED
             }
           ],
         },
@@ -355,7 +356,7 @@ export const mockData: { users: SeedUser[] } = {
             startDate: new Date("2026-03-01"),
             endDate: new Date("2026-12-31")
           },
-          status: GoalStatus.PAUSED,
+          status: Status.PAUSED,
           categoryId: 6,
           tasks: [
             {
@@ -365,7 +366,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-03-01"),
                 endDate: new Date("2026-03-05")
               },
-              status: TaskStatus.COMPLETED
+              status: Status.COMPLETED
             },
             {
               title: "Inscribirse en academia",
@@ -374,7 +375,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-03-10"),
                 endDate: new Date("2026-03-20")
               },
-              status: TaskStatus.REJECTED
+              status: Status.REJECTED
             },
             {
               title: "Practicar conversación semanal",
@@ -383,7 +384,7 @@ export const mockData: { users: SeedUser[] } = {
                 startDate: new Date("2026-04-01"),
                 endDate: new Date("2026-12-31")
               },
-              status: TaskStatus.INACTIVE
+              status: Status.INACTIVE
             }
           ],
         },
